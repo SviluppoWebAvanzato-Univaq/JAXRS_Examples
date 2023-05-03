@@ -98,7 +98,7 @@ public class AuthenticationRes {
             String authorizationHeader = headers.getHeaderString(HttpHeaders.AUTHORIZATION);
             String token = authorizationHeader.substring("Bearer".length()).trim();
             Key key = JWTHelpers.getInstance().getJwtKey();
-            Claims jwsc = Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody();
+            Claims jwsc = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
             String newtoken = issueToken(uriinfo, jwsc.getSubject());
             return Response.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + newtoken).build();
         } catch (ExpiredJwtException | MalformedJwtException | UnsupportedJwtException | SignatureException | IllegalArgumentException e) {

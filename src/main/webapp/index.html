@@ -1,43 +1,297 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>JAX-RS Test Server</title>
+        <title>JAX-RS Test Application</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Jax-RS Test Server</h1>
-        <h1>JAX-RS template application</h1>
-        <p>This is a template web application based on <strong>JakartaEE 9</strong> that runs on Apache <strong>Tomcat 10</strong> with <strong>Java 14</strong> or above.</p>
+        <h1>JAX-RS Test application</h1>
+        <p>This is a sample web application based on <strong>JakartaEE 9</strong> that runs on Apache <strong>Tomcat 10</strong> with <strong>Java 14</strong> or above.</p>
         <p> The application is configured to expose RESTful resources through the <strong>JAX-RS</strong> reference implementation, <strong>Jersey</strong> (version 3, for Jakarta EE).</p>
         <p> JAX-RS JSON serialization is handled by the <strong>Jackson</strong> JSON Provider (version 2, for Jakarta EE).</p>
 
-        <p>You can read the automatically-generated OpenAPI documentation at the address <a href="rest/openapi.json">/rest/openapi.json</a></p>
+        <p>The RESTful resources, grouped under the /rest prefix, are the following:</p>
 
-        <h2>Some interesting URLS to GET</h2>
-        <ul>
-            <li><a href="rest/articles/1/issue/articles">/rest/articles/1/issue/articles</a></li>
-            <li><a href="rest/articles">/rest/articles</a></li>
-            <li><a href="rest/articles/1/issue">/rest/articles/1/issue</a></li>
-            <li><a href="rest/articles/1">/rest/articles/1</a></li>
-            <li><a href="rest/res1">/rest/res1</a></li>
-            <li><a href="rest/res1/bean">/rest/res1/bean</a></li>
-            <li><a href="rest/res1/custombean">/rest/res1/custombean</a></li>
-            <li><a href="rest/res1/items/12">/rest/res1/items/12</a></li>
-            <li><a href="rest/res1/list">/rest/res1/list</a></li>
-            <li><a href="rest/res1/beanlist">/rest/res1/beanlist</a></li>
-            <li><a href="rest/res1/items?filter=test">/rest/res1/items?filter=test</a></li>
-            <li><a href="rest/res1/binary">/rest/res1/binary</a></li>
-            <li><a href="rest/res1/sub1">/rest/res1/sub1</a></li>
-            <li><a href="rest/res1/sub2/123">/rest/res1/sub2/123</a></li>
-            <li><a href="rest/res1/sub2/123/sub">/rest/res1/sub2/123/sub</a></li>
-            <li><a href="rest/res1/sub2/123/hello">/rest/res1/sub2/123/hello</a></li>
-            <li><a href="rest/res1/sub3/123">/rest/res1/sub3/123</a></li>
-            <li><a href="rest/res1/sub4">/rest/res1/sub4</a></li>
-            <li><a href="rest/res1/sub5/123">/rest/res1/sub5/123</a></li>
-            <li><a href="rest/res1/sub6">/rest/res1/sub6</a></li>
-            <li><a href="rest/res2">/rest/res2</a></li>
-        </ul>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Path</th>
+                    <th>Method</th>
+                    <th>Parameters</th>
+                    <th>Payload</th>
+                    <th>Authentication</th>
+                    <th>URLs to Try</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">/res1</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1">/rest/res1</a></td>
+                </tr>
+                <tr>
 
+                    <td>POST</td>
+                    <td>&nbsp;</td>
+                    <td>JSON</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+
+                    <td>DELETE</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>/res1/list</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/list">/rest/res1/list</a></td>
+                </tr>
+                <tr>
+                    <td>/res1/map</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/map">/rest/res1/map</a></td>
+                </tr>
+
+                <tr>
+                    <td>/res1/binary</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/binary">/rest/res1/binary</a></td>
+                </tr>
+                <tr>
+                    <td rowspan="3">/res1/bean</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/bean">/rest/res1/bean</a></td>
+                </tr>
+                <tr>
+
+                    <td>POST</td>
+                    <td>&nbsp;</td>
+                    <td>JSON (Simpleclass) </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+
+                    <td>PUT</td>
+                    <td>&nbsp;</td>
+                    <td>JSON (Simpleclass) </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>/res1/custombean</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/custombean">/rest/res1/custombean</a></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">/res1/beanlist</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/beanlist">/rest/res1/beanlist</a></td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>&nbsp;</td>
+                    <td>JSON (SimpleClass list)</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>/res1/items/{n}</td>
+                    <td>GET</td>
+                    <td>{n}: [0-9]+</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/items/12">/rest/res1/items/12</a></td>
+                </tr>
+                <tr>
+                    <td>/res1/items?filter={x}</td>
+                    <td>GET</td>
+                    <td>{s}: string</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/items?filter=test">/rest/res1/items?filter=test</a></td>
+                </tr>
+                <tr>
+                    <td>/res1/stream</td>
+                    <td>POST</td>
+                    <td>&nbsp;</td>
+                    <td>JSON</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>/res1/multitype</td>
+                    <td>POST</td>
+                    <td>&nbsp;</td>
+                    <td>String or JSON</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+
+                <tr>
+                    <td>/res1/sub1</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/sub1">/rest/res1/sub1</a></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">/res1/sub2/{n}</td>
+                    <td>GET</td>
+                    <td>{n}: [0-9]+</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/sub2/123">/rest/res1/sub2/123</a></td>
+                </tr>
+                <tr>
+
+                    <td>DELETE</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>/res1/sub2/{n}/hello</td>
+                    <td>GET</td>
+                    <td>{n}: [0-9]+</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/sub2/123/hello">/rest/res1/sub2/123/hello</a></td>
+                </tr>
+                <tr>
+                    <td>/res1/sub2/{n}/sub</td>
+                    <td>GET</td>
+                    <td>{n}: [0-9]+</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/sub2/123/sub">/rest/res1/sub2/123/sub</a></td>
+                </tr>
+                <tr>
+                    <td>/res1/sub3/{n}</td>
+                    <td>GET</td>
+                    <td>{n}: [0-9]+</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/sub3/123">/rest/res1/sub3/123</a></td>
+                </tr>
+                <tr>
+                    <td>/res1/sub4</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/sub4">/rest/res1/sub4</a></td>
+                </tr>
+                <tr>
+                    <td>/rest/res2</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res2">/rest/res2</a></td>
+                </tr>
+                <tr>
+                    <td>/res1/sub5/{n}</td>
+                    <td>GET</td>
+                    <td>{n}: [0-9]+</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/sub5/123">/rest/res1/sub5/123</a></td>
+                </tr>
+                <tr>
+                    <td>/res1/sub6</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/res1/sub6">/rest/res1/sub6</a></td>
+                </tr>               
+                <tr>
+                    <td>/res1/secure</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>Bearer token</td>
+                    <td><a href="rest/res1/secure">/rest/res1/secure</a></td>
+                </tr>
+                <tr>
+                    <td>/issues</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/issues">/rest/issues</a></td>
+                </tr>
+                <tr>
+                    <td>/issues/{n}</td>
+                    <td>GET</td>
+                    <td>{n}: [0-9]+</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/issues/4">/rest/issues/4</a></td>
+                </tr>               
+                <tr>
+                    <td>/issues/{n}/articles</td>
+                    <td>GET</td>
+                    <td>{n}: [0-9]+</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/issues/4/articles">/rest/issues/4/articles</a></td>
+                </tr>
+                <tr>
+                    <td>/articles</td>
+                    <td>GET</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/articles">/rest/articles</a></td>
+                </tr>
+                <tr>
+                    <td>/articles/{n}</td>
+                    <td>GET</td>
+                    <td>{n}: [0-9]+</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/articles/1">/rest/articles/1</a></td>
+                </tr>
+                <tr>
+                    <td>/articles/{n}/issue</td>
+                    <td>GET</td>
+                    <td>{n}: [0-9]+</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td><a href="rest/articles/1/issue">/rest/articles/1/issue</a><br/>
+                        <a href="rest/articles/1/issue/articles">/rest/articles/1/issue/articles</a></td>
+                </tr>              
+            </tbody>
+        </table>
     </body>
 </html>

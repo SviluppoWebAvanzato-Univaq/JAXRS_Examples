@@ -1,5 +1,9 @@
 package org.univaq.swa.examples.security;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +32,11 @@ public class JWTHelpers {
 
     public SecretKey getJwtKey() {
         return jwtKey;
+    }
+
+    public String validateToken(String token) {
+        Jws<Claims> jwsc = Jwts.parserBuilder().setSigningKey(getJwtKey()).build().parseClaimsJws(token);
+        return jwsc.getBody().getSubject();
     }
 
     public static JWTHelpers getInstance() {

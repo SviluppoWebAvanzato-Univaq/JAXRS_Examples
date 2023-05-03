@@ -23,8 +23,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.univaq.swa.examples.base.RESTWebApplicationException;
+import org.univaq.swa.examples.security.AuthLevel1;
 
 /**
  *
@@ -171,6 +174,32 @@ public class Resource1 {
         //JAX-RS la serializza automaticamente in JSON se Jackson è tra le librerie!
         return Response.ok(c).build();
     }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //GET /rest/res1/beanlist
+    //Accept: application/json
+    @GET
+    @Path("beanlist")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response get_bean_list_json() {
+        List<SimpleClass> l = new ArrayList<>();
+        l.add(new SimpleClass("class1", 1, new SimpleClass("class2", 3, null)));
+        l.add(new SimpleClass("class3", 4, new SimpleClass("class4", 5, null)));
+        return Response.ok(l).build();
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    //GET /rest/res1/map
+    //Accept: application/json
+    @GET
+    @Path("map")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response get_map_json() {
+        Map<String,Object> m = new HashMap<>();
+        m.put("Numero", 1);
+        m.put("Oggetto", new SimpleClass("s", 0, null));
+        return Response.ok(m).build();
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     /*
@@ -188,20 +217,7 @@ public class Resource1 {
         AdvancedClass c = new AdvancedClass("class1", 1, new AdvancedClass("class2", 3, null));
         return Response.ok(c).build();
     }
-
-    ////////////////////////////////////////////////////////////////////////////
-    //GET /rest/res1/beanlist
-    //Accept: application/json
-    @GET
-    @Path("beanlist")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response get_bean_list_json() {
-        List<SimpleClass> l = new ArrayList<>();
-        l.add(new SimpleClass("class1", 1, new SimpleClass("class2", 3, null)));
-        l.add(new SimpleClass("class3", 4, new SimpleClass("class4", 5, null)));
-        return Response.ok(l).build();
-    }
-
+    
     ////////////////////////////////////////////////////////////////////////////
     /*
      * proviamo ora a gestire path parametrici, del tipo
@@ -216,7 +232,7 @@ public class Resource1 {
     //Accept: application/json
     @GET
     @Path("items/{id: [0-9]+}")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response get_item_by_id(@PathParam("id") int n) {
         /*
          * L'annotazione @PathParam permette di "iniettare"
@@ -225,7 +241,7 @@ public class Resource1 {
          * a convertire il parametro della URL nel tipo richiesto
          * dal metodo.
          */
-        return Response.ok(n).build();
+        return Response.ok("Item " + n).build();
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -554,5 +570,20 @@ public class Resource1 {
     @Produces(MediaType.APPLICATION_JSON)
     public Response toSub6() {
         throw new RESTWebApplicationException(500, "problema");
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////
+    /////////////// SICUREZZA //////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    /*
+     * questa risorsa non verrà restituita se non si ha un corretto bearer token
+     * associato alla richiesta
+     */
+    //<qualsiasi metodo> /rest/res1/secure
+    @Path("secure")
+    @GET
+    @AuthLevel1
+    public String get_secures_text() {
+        return "testo protetto";
     }
 }

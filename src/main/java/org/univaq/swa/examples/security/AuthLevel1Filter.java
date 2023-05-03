@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.security.Key;
 import java.security.Principal;
 
-
 /**
  *
  * @author didattica
@@ -29,7 +28,7 @@ public class AuthLevel1Filter implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String token = null;
         final String path = requestContext.getUriInfo().getAbsolutePath().toString();
-        
+
         //come esempio, proviamo a cercare il token in vari punti, in ordine di priorità
         //in un'applicazione reale, potremmo scegliere una sola modalità
         String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
@@ -96,11 +95,9 @@ public class AuthLevel1Filter implements ContainerRequestFilter {
     }
 
     private String validateToken(String token) {
-      //JWT                
-      Key key = AppGlobals.getInstance().getJwtKey();
-      Jws<Claims> jwsc = Jwts.parser().setSigningKey(key).parseClaimsJws(token);
-      return jwsc.getBody().getSubject();
-      //  return "pippo"; //andrebbe derivato dal token!
+        //JWT                
+        return JWTHelpers.getInstance().validateToken(token);
+        //  return "pippo"; //andrebbe derivato dal token!
     }
 
 }

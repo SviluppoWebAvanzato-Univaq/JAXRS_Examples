@@ -3,8 +3,6 @@ package org.univaq.swa.examples.base;
 import org.univaq.swa.examples.security.CORSFilter;
 import org.univaq.swa.examples.security.AppExceptionMapper;
 import com.fasterxml.jackson.jakarta.rs.json.JacksonJsonProvider;
-import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
-import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 import org.univaq.swa.examples.jackson.ObjectMapperContextResolver;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
@@ -55,14 +53,7 @@ public class JAXRSApplication extends Application {
 
         //esempio di exception mapper, che mappa in Response eccezioni non già derivanti da WebApplicationException
         c.add(AppExceptionMapper.class);
-        
-        //swagger
-        https://github.com/swagger-api/swagger-core/wiki/Swagger-2.X---Integration-and-Configuration#jersey-jax-rs-container-servlet
-        c.add(OpenApiResource.class);
-        c.add(AcceptHeaderOpenApiResource.class);
-
-
-
+             
         classes = Collections.unmodifiableSet(c);
     }
 
