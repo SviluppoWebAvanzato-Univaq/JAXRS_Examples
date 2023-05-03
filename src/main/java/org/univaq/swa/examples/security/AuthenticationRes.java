@@ -100,7 +100,9 @@ public class AuthenticationRes {
             Key key = JWTHelpers.getInstance().getJwtKey();
             Claims jwsc = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
             String newtoken = issueToken(uriinfo, jwsc.getSubject());
-            return Response.ok().header(HttpHeaders.AUTHORIZATION, "Bearer " + newtoken).build();
+            return Response.ok(newtoken)
+                    .cookie(new NewCookie("token", newtoken))
+                    .header(HttpHeaders.AUTHORIZATION, "Bearer " + newtoken).build();
         } catch (ExpiredJwtException | MalformedJwtException | UnsupportedJwtException | SignatureException | IllegalArgumentException e) {
             return Response.status(UNAUTHORIZED).build();
         }

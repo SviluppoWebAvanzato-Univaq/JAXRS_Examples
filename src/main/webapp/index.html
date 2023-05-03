@@ -13,7 +13,16 @@
 
         <p>The RESTful resources, grouped under the /rest prefix, are the following:</p>
 
-        <table border="1">
+        <div style="border: 2px solid gray">
+            <form method="post" action="rest/auth/login" enctype="application/x-www-form-urlencoded">
+                <p>Username: <input type="text" value="u" id="username" name="username"/> 
+                    Password: <input type="password" value="p" id="password" name="password"/>
+                    <input type="submit" value="login" name="login" id="login"/></p>      
+            </form>
+            <p>Token: <input type="text" id="token" name="token"/> (<a href="rest/auth/refresh" class="withauth">refresh</a>)</p>
+        </div>
+
+        <table border="1" width="100%">
             <thead>
                 <tr>
                     <th>Path</th>
@@ -240,7 +249,11 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>Bearer token</td>
-                    <td><a href="rest/res1/secure">/rest/res1/secure</a></td>
+                    <td>
+                        <a href="rest/res1/secure">/rest/res1/secure</a><br/>
+                        <a href="rest/res1/secure" class="withauth">/rest/res1/secure</a>
+
+                    </td>
                 </tr>
                 <tr>
                     <td>/issues</td>
@@ -293,5 +306,56 @@
                 </tr>              
             </tbody>
         </table>
+
+        <script>
+            function sendLoginRequest(u,p) {
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "rest/auth/login", false);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("username="+u+"&password="+p);
+                let token = "";
+                if (xhr.status === 200) {
+                    token = xhr.responseText;
+                    //console.log(xhr.responseText);
+                } else {
+                    token = "Status code: " + xhr.status;
+                    //console.log("Status code: " + xhr.status);
+                }
+                document.getElementById("token").value = token;
+            }
+
+
+            function sendAuthenticatedRequest(href, token) {
+                let xhr = new XMLHttpRequest();
+                xhr.open("GET", href, false);
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+                xhr.send(null);
+                if (xhr.status === 200) {
+                    document.body.innerText = xhr.responseText;
+                    //console.log(xhr.responseText);
+                } else {
+                    document.body.innerText = "Status code: " + xhr.status;
+                    //console.log("Status code: " + xhr.status);
+                }
+            }
+            
+            let nl = document.querySelectorAll(".withauth");
+            for (let i = 0; i < nl.length; ++i) {
+                let anchor = nl.item(i);
+                anchor.addEventListener("click", function (e) {
+                    let token = document.getElementById("token").value;
+                    sendAuthenticatedRequest(anchor.href, token);
+                    e.preventDefault();
+                });
+            }
+            
+            document.getElementById("login").addEventListener("click", function (e) {
+                    let u = document.getElementById("username").value;
+                    let p = document.getElementById("password").value;
+                    sendLoginRequest(u,p);
+                    e.preventDefault();
+                });
+
+        </script>
     </body>
 </html>
