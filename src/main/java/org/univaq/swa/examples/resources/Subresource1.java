@@ -8,7 +8,7 @@ import jakarta.ws.rs.core.Response;
 /**
  * Questa è una sotto-risorsa, in quanto non ha un'annotazione @Path e quindi
  * può essere attivata solo tramite il passaggio di controllo da parte di
- * un'altra risorsa. L'elaborazione del path continuerà qui, senza considerare i
+ * un'altra risorsa. L'elaborazione del path continuerà qui, senza considerare il
  * prefisso già consumato dalla risorsa padre.
  *
  * @author Giuseppe Della Penna

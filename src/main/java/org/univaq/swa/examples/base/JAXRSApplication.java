@@ -25,7 +25,9 @@ import org.univaq.swa.examples.security.AuthenticationRes;
  */
 @ApplicationPath("rest")
 public class JAXRSApplication extends Application {
+
     private final Set<Class<?>> classes;
+
     public JAXRSApplication() {
         HashSet<Class<?>> c = new HashSet<Class<?>>();
         //aggiungiamo tutte le *root resurces* (cioè quelle
@@ -51,9 +53,10 @@ public class JAXRSApplication extends Application {
         //aggiungiamo il filtro che gestisce gli header CORS
         c.add(CORSFilter.class);
 
-        //esempio di exception mapper, che mappa in Response eccezioni non già derivanti da WebApplicationException
+        //esempio di exception mapper, che mappa in Response eccezioni non 
+        //già derivanti da WebApplicationException
         c.add(AppExceptionMapper.class);
-             
+
         classes = Collections.unmodifiableSet(c);
     }
 

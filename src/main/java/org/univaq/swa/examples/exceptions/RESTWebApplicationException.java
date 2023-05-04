@@ -1,4 +1,4 @@
-package org.univaq.swa.examples.base;
+package org.univaq.swa.examples.exceptions;
 
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Response;

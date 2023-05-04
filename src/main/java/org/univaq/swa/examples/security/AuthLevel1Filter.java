@@ -1,8 +1,5 @@
 package org.univaq.swa.examples.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
 import jakarta.annotation.Priority;
 import jakarta.ws.rs.Priorities;
 import jakarta.ws.rs.container.ContainerRequestContext;
@@ -12,7 +9,6 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.SecurityContext;
 import jakarta.ws.rs.ext.Provider;
 import java.io.IOException;
-import java.security.Key;
 import java.security.Principal;
 
 /**
@@ -97,7 +93,5 @@ public class AuthLevel1Filter implements ContainerRequestFilter {
     private String validateToken(String token) {
         //JWT                
         return JWTHelpers.getInstance().validateToken(token);
-        //  return "pippo"; //andrebbe derivato dal token!
     }
-
 }

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import jakarta.ws.rs.ext.ContextResolver;
 import jakarta.ws.rs.ext.Provider;
 import java.util.Calendar;
-import org.univaq.swa.examples.base.AdvancedClass;
+import org.univaq.swa.examples.model.AdvancedClass;
 
 /**
  *

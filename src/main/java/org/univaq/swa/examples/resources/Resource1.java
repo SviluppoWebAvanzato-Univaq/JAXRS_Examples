@@ -1,7 +1,7 @@
 package org.univaq.swa.examples.resources;
 
-import org.univaq.swa.examples.base.AdvancedClass;
-import org.univaq.swa.examples.base.SimpleClass;
+import org.univaq.swa.examples.model.AdvancedClass;
+import org.univaq.swa.examples.model.SimpleClass;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.univaq.swa.examples.base.RESTWebApplicationException;
+import org.univaq.swa.examples.exceptions.RESTWebApplicationException;
 import org.univaq.swa.examples.security.AuthLevel1;
 
 /**
@@ -77,7 +77,6 @@ public class Resource1 {
     }
 
     ////////////////////////////////////////////////////////////////////////////
-
     /*
      * stesso verbo HTTP sulla stessa risprsa,
      * ma in questo caso il metodo verrà chiamato
@@ -106,7 +105,6 @@ public class Resource1 {
     }
 
     ////////////////////////////////////////////////////////////////////////////
-
     /* 
      * Tramite l'annotazione @Path definiamo un sotto-path
      * a cui questo metodo dovrà rispondere, in particolare
@@ -174,7 +172,7 @@ public class Resource1 {
         //JAX-RS la serializza automaticamente in JSON se Jackson è tra le librerie!
         return Response.ok(c).build();
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
     //GET /rest/res1/beanlist
     //Accept: application/json
@@ -187,7 +185,7 @@ public class Resource1 {
         l.add(new SimpleClass("class3", 4, new SimpleClass("class4", 5, null)));
         return Response.ok(l).build();
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
     //GET /rest/res1/map
     //Accept: application/json
@@ -195,7 +193,7 @@ public class Resource1 {
     @Path("map")
     @Produces(MediaType.APPLICATION_JSON)
     public Response get_map_json() {
-        Map<String,Object> m = new HashMap<>();
+        Map<String, Object> m = new HashMap<>();
         m.put("Numero", 1);
         m.put("Oggetto", new SimpleClass("s", 0, null));
         return Response.ok(m).build();
@@ -217,7 +215,7 @@ public class Resource1 {
         AdvancedClass c = new AdvancedClass("class1", 1, new AdvancedClass("class2", 3, null));
         return Response.ok(c).build();
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
     /*
      * proviamo ora a gestire path parametrici, del tipo
@@ -263,7 +261,7 @@ public class Resource1 {
          * su un parametro del metodo il valore effettivo del
          * parametro della query string col nome indicato. JAX-RS proverà
          * a convertire il parametro della query string nel tipo richiesto
-         * dal metodo. Se il parametro non è spacificato, verrà impostato
+         * dal metodo. Se il parametro non è specificato, verrà impostato
          * su null.
          */
         if (f != null) {
@@ -297,9 +295,6 @@ public class Resource1 {
             @Context UriInfo c,
             //il parametro senza annotazioni viene invece
             //riempito da JAX-RS col payload della richiesta
-            //si può usare anche il tipo InputStream per ricevere
-            //il payload sotto forma di uno stream leggibile
-            //incrementalmente
             String data) {
 
         /* 
@@ -329,7 +324,7 @@ public class Resource1 {
 //      URI u2 = c.getBaseUriBuilder()
 //             .path(Resource1.class) //arriviamo alla risorsa Resource1
 //             .path(Resource1.class,"toSub1") //passiamo alla Subresource1 tramite il suo metodo toSub1
-//             .path(Subresource1.class, "get_json2") //chiamiamo uno specifico metodo della Subresource1 (un esempio non presente nel codice)
+//             .path(Subresource1.class, "get_json") //chiamiamo uno specifico metodo della Subresource1 
 //             .build()); //supponiamo che nel path costruito non ci siano parametri
 
         /* ATTENZIONE: la sintassi alternativa sotto riportata, invece, APPENDE il path
@@ -428,6 +423,7 @@ public class Resource1 {
         return Response.created(u).build();
     }
 
+    ////////////////////////////////////////////////////////////////////////////
     /*
      * In questo caso il metodo POST accetta più tipi diversi come payload.
      * Non potendo eseguire una decodifica immediata, riceviamo il payload come 
@@ -466,12 +462,12 @@ public class Resource1 {
     /*
      * Quanto detto per POST vale anche per il metodo PUT.
      */
-    //PUT /rest/res1/bean
+    //PUT /rest/res1/custombean
     //Content-Type: application/json
     @PUT
-    @Path("bean")
+    @Path("custombean")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response put_item_bean(SimpleClass c) {
+    public Response put_item_bean(AdvancedClass c) {
         //di solito una PUT restituisce NO CONTENT
         return Response.noContent().build();
     }
@@ -533,9 +529,9 @@ public class Resource1 {
      * La sotto-risorsa che segue può essere attivata anche come risorsa radice,
      * con il path rest/res1sub4
      */
-    //<qualsiasi metodo> /rest/res1/sub4
-    @Path("sub4")
-    public Resource2 toSub4() {
+    //<qualsiasi metodo> /rest/res1/res2
+    @Path("res2")
+    public Resource2 toRes2() {
         return new Resource2(3);
     }
 
@@ -571,7 +567,7 @@ public class Resource1 {
     public Response toSub6() {
         throw new RESTWebApplicationException(500, "problema");
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
     /////////////// SICUREZZA //////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////
@@ -584,6 +580,6 @@ public class Resource1 {
     @GET
     @AuthLevel1
     public String get_secures_text() {
-        return "testo protetto";
+        return "secured text";
     }
 }

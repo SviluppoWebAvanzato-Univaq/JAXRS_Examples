@@ -9,8 +9,8 @@ import jakarta.ws.rs.core.Response;
 /**
  * Questa è una sotto-risorsa, in quanto non ha un'annotazione @Path e quindi
  * può essere attivata solo tramite il passaggio di controllo da parte di
- * un'altra risorsa. L'elaborazione del path continuerà qui, senza considerare i
- * prefisso già consumato dalla risorsa padre.
+ * un'altra risorsa. L'elaborazione del path continuerà qui, senza considerare
+ * il prefisso già consumato dalla risorsa padre.
  *
  * @author Giuseppe Della Penna
  */
@@ -25,8 +25,7 @@ public class Subresource3 {
     /*
      * Se l'oggetto prova ad accedere a una PathParam non presente
      * nel path effettivo che ha portato alla sua attivazione,
-     * il parametro sarà posto a nullo (o zero in questo caso):
-     * provate a chiamare /rest/res1/sub3 e /rest/res1/sub3/9
+     * il parametro sarà posto a nullo (o zero in questo caso)
      */
     //GET /rest/res1/sub3/<n>}
     //Accept: application/json

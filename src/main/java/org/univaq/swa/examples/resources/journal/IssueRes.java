@@ -12,7 +12,7 @@ public class IssueRes {
      * questa sub-resource riceve tutti i dati necessari
      * alla sua istanziazione direttamente nel costruttore.
      * In questo modo è totalmente indipendente dal path che
-     * ha portato alla sua attivazione, in particolare i parametri
+     * ha portato alla sua attivazione, e in particolare i parametri
      * che la definiscono (qui solo iid) possono provenire dal path
      * o da altre sorgenti
      */

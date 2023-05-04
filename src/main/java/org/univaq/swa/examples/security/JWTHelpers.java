@@ -3,7 +3,6 @@ package org.univaq.swa.examples.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +11,7 @@ import javax.crypto.SecretKey;
 
 /**
  *
- * @author didattica Una classe di utilità per provare i token JWT
+ * Una classe di utilità per provare i token JWT
  *
  */
 public class JWTHelpers {

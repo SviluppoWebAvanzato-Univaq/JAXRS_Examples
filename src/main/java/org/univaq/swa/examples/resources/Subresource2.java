@@ -11,8 +11,8 @@ import jakarta.ws.rs.core.Response;
 /**
  * Questa è una sotto-risorsa, in quanto non ha un'annotazione @Path e quindi
  * può essere attivata solo tramite il passaggio di controllo da parte di
- * un'altra risorsa. L'elaborazione del path continuerà qui, senza considerare i
- * prefisso già consumato dalla risorsa padre.
+ * un'altra risorsa. L'elaborazione del path continuerà qui, senza considerare
+ * il prefisso già consumato dalla risorsa padre.
  *
  * @author Giuseppe Della Penna
  */
@@ -39,14 +39,13 @@ public class Subresource2 {
     @Path("hello")
     @Produces(MediaType.TEXT_PLAIN)
     public Response get_pippo_json() {
-        return Response.ok("hello").build();
+        return Response.ok("greetings!").build();
     }
 
     /* 
-     * ...oppure gestuire metodi diversi...
+     * ...oppure gestire metodi diversi...
      */
     //DELETE /rest/res1/sub2/<n>
-    //Accept: application/json
     @DELETE
     public Response delete() {
         return Response.noContent().build();
@@ -57,7 +56,7 @@ public class Subresource2 {
      */
     //<qualsiasi metodo> /rest/res1/sub2/<n>/sub
     @Path("sub")
-    public Subresource4 toSub() {
+    public Subresource4 toSub4() {
         return new Subresource4();
     }
 

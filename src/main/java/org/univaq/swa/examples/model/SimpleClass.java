@@ -1,8 +1,6 @@
-package org.univaq.swa.examples.base;
+package org.univaq.swa.examples.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-
 
 /**
  *

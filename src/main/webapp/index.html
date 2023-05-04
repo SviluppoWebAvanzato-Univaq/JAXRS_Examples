@@ -14,12 +14,15 @@
         <p>The RESTful resources, grouped under the /rest prefix, are the following:</p>
 
         <div style="border: 2px solid gray">
+            <p><strong>Login to receive the access token needed to call secured endpoints</strong></p>
             <form method="post" action="rest/auth/login" enctype="application/x-www-form-urlencoded">
-                <p>Username: <input type="text" value="u" id="username" name="username"/> 
-                    Password: <input type="password" value="p" id="password" name="password"/>
+                <p>Username: <input style="width:30%" type="text" value="u" id="username" name="username"/> 
+                    Password: <input style="width:30%" type="password" value="p" id="password" name="password"/>
                     <input type="submit" value="login" name="login" id="login"/></p>      
             </form>
-            <p>Token: <input type="text" id="token" name="token"/> (<a href="rest/auth/refresh" class="withauth">refresh</a>)</p>
+            <form method="post" action="rest/auth/login" enctype="application/x-www-form-urlencoded">
+                <p>Token: <input style="width:80%" type="text" id="token" name="token"/> <input type="submit" value="refresh" name="refresh" id="refresh"/></p>
+            </form>
         </div>
 
         <table border="1" width="100%">
@@ -84,7 +87,7 @@
                     <td><a href="rest/res1/binary">/rest/res1/binary</a></td>
                 </tr>
                 <tr>
-                    <td rowspan="3">/res1/bean</td>
+                    <td rowspan="2">/res1/bean</td>
                     <td>GET</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -98,22 +101,21 @@
                     <td>JSON (Simpleclass) </td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                </tr>
+                </tr>             
                 <tr>
-
-                    <td>PUT</td>
-                    <td>&nbsp;</td>
-                    <td>JSON (Simpleclass) </td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
-                    <td>/res1/custombean</td>
+                    <td  rowspan="2">/res1/custombean</td>
                     <td>GET</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td><a href="rest/res1/custombean">/rest/res1/custombean</a></td>
+                </tr>
+                <tr>
+                    <td>PUT</td>
+                    <td>&nbsp;</td>
+                    <td>JSON (Advancedclass) </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td rowspan="2">/res1/beanlist</td>
@@ -212,15 +214,15 @@
                     <td><a href="rest/res1/sub3/123">/rest/res1/sub3/123</a></td>
                 </tr>
                 <tr>
-                    <td>/res1/sub4</td>
+                    <td>/res1/res2</td>
                     <td>GET</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/sub4">/rest/res1/sub4</a></td>
+                    <td><a href="rest/res1/res2">/rest/res1/res2</a></td>
                 </tr>
                 <tr>
-                    <td>/rest/res2</td>
+                    <td>/res2</td>
                     <td>GET</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -250,8 +252,8 @@
                     <td>&nbsp;</td>
                     <td>Bearer token</td>
                     <td>
-                        <a href="rest/res1/secure">/rest/res1/secure</a><br/>
-                        <a href="rest/res1/secure" class="withauth">/rest/res1/secure</a>
+                        <a href="rest/res1/secure">/rest/res1/secure (without authentication)</a><br/>
+                        <a href="rest/res1/secure" class="withauth">/rest/res1/secure (with authentication)</a>
 
                     </td>
                 </tr>
@@ -308,20 +310,25 @@
         </table>
 
         <script>
-            function sendLoginRequest(u,p) {
+            /*
+             * the following functions handle the login form and automatically
+             * intercept all the user clicks on "withauth" links, executing the
+             * corresponding AJAX call with the Authorization header.
+             * 
+             */
+            
+            function sendLoginRequest(u, p) {
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST", "rest/auth/login", false);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xhr.send("username="+u+"&password="+p);
-                let token = "";
+                xhr.send("username=" + u + "&password=" + p);
                 if (xhr.status === 200) {
-                    token = xhr.responseText;
+                    return xhr.responseText;
                     //console.log(xhr.responseText);
                 } else {
-                    token = "Status code: " + xhr.status;
+                    return "Status code: " + xhr.status;
                     //console.log("Status code: " + xhr.status);
                 }
-                document.getElementById("token").value = token;
             }
 
 
@@ -331,30 +338,38 @@
                 xhr.setRequestHeader("Authorization", "Bearer " + token);
                 xhr.send(null);
                 if (xhr.status === 200) {
-                    document.body.innerText = xhr.responseText;
+                    return xhr.responseText;
                     //console.log(xhr.responseText);
                 } else {
-                    document.body.innerText = "Status code: " + xhr.status;
+                    return "Status code: " + xhr.status;
                     //console.log("Status code: " + xhr.status);
                 }
             }
-            
+
             let nl = document.querySelectorAll(".withauth");
             for (let i = 0; i < nl.length; ++i) {
                 let anchor = nl.item(i);
                 anchor.addEventListener("click", function (e) {
                     let token = document.getElementById("token").value;
-                    sendAuthenticatedRequest(anchor.href, token);
+                    document.body.innerText = sendAuthenticatedRequest(anchor.href, token);
                     e.preventDefault();
                 });
             }
-            
+
             document.getElementById("login").addEventListener("click", function (e) {
-                    let u = document.getElementById("username").value;
-                    let p = document.getElementById("password").value;
-                    sendLoginRequest(u,p);
-                    e.preventDefault();
-                });
+                let u = document.getElementById("username").value;
+                let p = document.getElementById("password").value;
+                let token = sendLoginRequest(u, p);
+                document.getElementById("token").value = token;
+                e.preventDefault();
+            });
+
+            document.getElementById("refresh").addEventListener("click", function (e) {
+                let token = document.getElementById("token").value;
+                token = sendAuthenticatedRequest("rest/auth/refresh", token);
+                document.getElementById("token").value = token;
+                e.preventDefault();
+            });
 
         </script>
     </body>

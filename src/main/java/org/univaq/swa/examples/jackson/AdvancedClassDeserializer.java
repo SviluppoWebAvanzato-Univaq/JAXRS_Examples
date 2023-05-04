@@ -8,7 +8,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import org.univaq.swa.examples.base.AdvancedClass;
+import java.util.Calendar;
+import org.univaq.swa.examples.model.AdvancedClass;
 
 public class AdvancedClassDeserializer extends StdDeserializer<AdvancedClass> {
 
@@ -28,12 +29,20 @@ public class AdvancedClassDeserializer extends StdDeserializer<AdvancedClass> {
         String stringa = node.has("stringa") ? node.get("stringa").asText() : "";
         AdvancedClass oggetto = null;
         if (node.has("oggetto")) {
-            JsonParser inner_jp = node.findValue("oggetto").traverse();
+            JsonParser inner_jp = node.get("oggetto").traverse();
             inner_jp.setCodec(jp.getCodec());
             oggetto = inner_jp.readValueAs(new TypeReference<AdvancedClass>() {
             });
         }
-        AdvancedClass doc = new AdvancedClass(stringa, intero, oggetto);
+
+        Calendar timestamp = null;
+        if (node.has("timestamp")) {
+            JsonParser inner_jp = node.get("timestamp").traverse();
+            inner_jp.setCodec(jp.getCodec());
+            timestamp = inner_jp.readValueAs(new TypeReference<Calendar>() {
+            });
+        }
+        AdvancedClass doc = new AdvancedClass(stringa, intero, oggetto, timestamp);
         return doc;
     }
 }

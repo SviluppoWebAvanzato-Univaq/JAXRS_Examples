@@ -70,8 +70,6 @@ public class AuthenticationRes {
     }
 
     private String issueToken(UriInfo context, String username) {
-//        String token = username + "skfjsdkj";
-
         //JWT        
         Key key = JWTHelpers.getInstance().getJwtKey();
         String token = Jwts.builder()
@@ -85,10 +83,9 @@ public class AuthenticationRes {
     }
 
     private void revokeToken(String token) {
-        /* invalidate il token */
+        /* invalidare il token */
     }
 
-/////////////////    
     //Metodo per fare "refresh" del token JWT senza ritrasmettere le credenziali
     @GET
     @Path("/refresh")
@@ -107,5 +104,4 @@ public class AuthenticationRes {
             return Response.status(UNAUTHORIZED).build();
         }
     }
-
 }

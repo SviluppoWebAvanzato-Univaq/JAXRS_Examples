@@ -1,4 +1,4 @@
-package org.univaq.swa.examples.base;
+package org.univaq.swa.examples.exceptions;
 
 /**
  *

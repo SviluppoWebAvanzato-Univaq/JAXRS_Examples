@@ -29,7 +29,7 @@ public class Resource2 {
         this.i = i;
     }
 
-    //GET /rest/res1/sub4 o /rest/res2
+    //GET /rest/res1/res2 o /rest/res2
     //Accept: application/json
     @GET
     @Produces(MediaType.TEXT_PLAIN)

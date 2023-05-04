@@ -6,15 +6,13 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-
-
 public class ArticleRes {
 
     /*
      * questa sub-resource riceve tutti i dati necessari
      * alla sua istanziazione direttamente nel costruttore.
      * In questo modo è totalmente indipendente dal path che
-     * ha portato alla sua attivazione, in particolare i parametri
+     * ha portato alla sua attivazione, e in particolare i parametri
      * che la definiscono (qui solo aid) possono provenire dal path
      * o da altre sorgenti
      */
@@ -37,7 +35,7 @@ public class ArticleRes {
      * rest/articles/<numero1>/issue/articles/<numero2>/issue
      * rest/issues/<numero1>/articles/<numero2>/issue
      * ...
-    */
+     */
     @Path("issue")
     public IssueRes getIssue() {
         return new IssueRes(aid + 10);
