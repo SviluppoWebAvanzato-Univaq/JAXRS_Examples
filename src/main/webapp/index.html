@@ -4,10 +4,29 @@
         <title>JAX-RS Test Application</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .rest-test-ok {
+                color: green;
+            }
+            .rest-test-ok:before {
+                content: '\2705';
+            }
+            .rest-test-error {
+                color: red;
+            }
+            .rest-test-error:before {
+                content: '\274c';
+            }
+            .rest-test-wait:before {
+                content: '\231b';
+            }
+
+
+        </style>
     </head>
     <body>
         <h1>JAX-RS Test application</h1>
-        <p>This is a sample web application based on <strong>JakartaEE 10</strong> that runs on Apache <strong>Tomcat 10</strong> with <strong>Java 14</strong> or above.</p>
+        <p>This is a sample web application based on <strong>JakartaEE 10</strong> that runs on Apache <strong>Tomcat 10.1</strong> with <strong>Java 14</strong> or above.</p>
         <p> The application is configured to expose RESTful resources through the <strong>JAX-RS</strong> reference implementation, <strong>Jersey</strong> (version 3, for Jakarta EE).</p>
         <p> JAX-RS JSON serialization is handled by the <strong>Jackson</strong> JSON Provider (version 2, for Jakarta EE).</p>
 
@@ -43,7 +62,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1">/rest/res1</a></td>
+                    <td><a data-rest-test href="rest/res1">/rest/res1</a></td>
                 </tr>
                 <tr>
 
@@ -67,7 +86,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/list">/rest/res1/list</a></td>
+                    <td><a data-rest-test href="rest/res1/list">/rest/res1/list</a></td>
                 </tr>
                 <tr>
                     <td>/res1/map</td>
@@ -75,7 +94,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/map">/rest/res1/map</a></td>
+                    <td><a data-rest-test href="rest/res1/map">/rest/res1/map</a></td>
                 </tr>
 
                 <tr>
@@ -92,7 +111,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/bean">/rest/res1/bean</a></td>
+                    <td><a data-rest-test href="rest/res1/bean">/rest/res1/bean</a></td>
                 </tr>
                 <tr>
 
@@ -108,7 +127,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/custombean">/rest/res1/custombean</a></td>
+                    <td><a data-rest-test href="rest/res1/custombean">/rest/res1/custombean</a></td>
                 </tr>
                 <tr>
                     <td>PUT</td>
@@ -123,7 +142,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/beanlist">/rest/res1/beanlist</a></td>
+                    <td><a data-rest-test href="rest/res1/beanlist">/rest/res1/beanlist</a></td>
                 </tr>
                 <tr>
                     <td>POST</td>
@@ -138,7 +157,7 @@
                     <td>{n}: [0-9]+</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/items/12">/rest/res1/items/12</a></td>
+                    <td><a data-rest-test href="rest/res1/items/12">/rest/res1/items/12</a></td>
                 </tr>
                 <tr>
                     <td>/res1/items?filter={x}</td>
@@ -146,7 +165,7 @@
                     <td>{s}: string</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/items?filter=test">/rest/res1/items?filter=test</a></td>
+                    <td><a data-rest-test href="rest/res1/items?filter=test">/rest/res1/items?filter=test</a></td>
                 </tr>
                 <tr>
                     <td>/res1/stream</td>
@@ -171,7 +190,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/sub1">/rest/res1/sub1</a></td>
+                    <td><a data-rest-test href="rest/res1/sub1">/rest/res1/sub1</a></td>
                 </tr>
                 <tr>
                     <td rowspan="2">/res1/sub2/{n}</td>
@@ -179,7 +198,7 @@
                     <td>{n}: [0-9]+</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/sub2/123">/rest/res1/sub2/123</a></td>
+                    <td><a data-rest-test href="rest/res1/sub2/123">/rest/res1/sub2/123</a></td>
                 </tr>
                 <tr>
 
@@ -195,7 +214,7 @@
                     <td>{n}: [0-9]+</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/sub2/123/hello">/rest/res1/sub2/123/hello</a></td>
+                    <td><a data-rest-test href="rest/res1/sub2/123/hello">/rest/res1/sub2/123/hello</a></td>
                 </tr>
                 <tr>
                     <td>/res1/sub2/{n}/sub</td>
@@ -203,7 +222,7 @@
                     <td>{n}: [0-9]+</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/sub2/123/sub">/rest/res1/sub2/123/sub</a></td>
+                    <td><a data-rest-test href="rest/res1/sub2/123/sub">/rest/res1/sub2/123/sub</a></td>
                 </tr>
                 <tr>
                     <td>/res1/sub3/{n}</td>
@@ -211,7 +230,7 @@
                     <td>{n}: [0-9]+</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/sub3/123">/rest/res1/sub3/123</a></td>
+                    <td><a data-rest-test href="rest/res1/sub3/123">/rest/res1/sub3/123</a></td>
                 </tr>
                 <tr>
                     <td>/res1/res2</td>
@@ -219,7 +238,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/res2">/rest/res1/res2</a></td>
+                    <td><a data-rest-test href="rest/res1/res2">/rest/res1/res2</a></td>
                 </tr>
                 <tr>
                     <td>/res2</td>
@@ -227,7 +246,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res2">/rest/res2</a></td>
+                    <td><a data-rest-test href="rest/res2">/rest/res2</a></td>
                 </tr>
                 <tr>
                     <td>/res1/sub5/{n}</td>
@@ -235,7 +254,7 @@
                     <td>{n}: [0-9]+</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/sub5/123">/rest/res1/sub5/123</a></td>
+                    <td><a data-rest-test href="rest/res1/sub5/123">/rest/res1/sub5/123</a></td>
                 </tr>
                 <tr>
                     <td>/res1/sub6</td>
@@ -243,7 +262,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/res1/sub6">/rest/res1/sub6</a></td>
+                    <td><a data-rest-test data-rest-test-status="500" href="rest/res1/sub6">/rest/res1/sub6</a></td>
                 </tr>               
                 <tr>
                     <td>/res1/secure</td>
@@ -252,7 +271,7 @@
                     <td>&nbsp;</td>
                     <td>Bearer token</td>
                     <td>
-                        <a href="rest/res1/secure">/rest/res1/secure (without authentication)</a><br/>
+                        <a data-rest-test data-rest-test-status="401" href="rest/res1/secure">/rest/res1/secure (without authentication)</a><br/>
                         <a href="rest/res1/secure" class="withauth">/rest/res1/secure (with authentication)</a>
 
                     </td>
@@ -263,7 +282,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/issues">/rest/issues</a></td>
+                    <td><a data-rest-test href="rest/issues">/rest/issues</a></td>
                 </tr>
                 <tr>
                     <td>/issues/{n}</td>
@@ -271,7 +290,7 @@
                     <td>{n}: [0-9]+</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/issues/4">/rest/issues/4</a></td>
+                    <td><a data-rest-test href="rest/issues/4">/rest/issues/4</a></td>
                 </tr>               
                 <tr>
                     <td>/issues/{n}/articles</td>
@@ -279,7 +298,7 @@
                     <td>{n}: [0-9]+</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/issues/4/articles">/rest/issues/4/articles</a></td>
+                    <td><a data-rest-test href="rest/issues/4/articles">/rest/issues/4/articles</a></td>
                 </tr>
                 <tr>
                     <td>/articles</td>
@@ -287,7 +306,7 @@
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/articles">/rest/articles</a></td>
+                    <td><a data-rest-test href="rest/articles">/rest/articles</a></td>
                 </tr>
                 <tr>
                     <td>/articles/{n}</td>
@@ -295,7 +314,7 @@
                     <td>{n}: [0-9]+</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/articles/1">/rest/articles/1</a></td>
+                    <td><a data-rest-test href="rest/articles/1">/rest/articles/1</a></td>
                 </tr>
                 <tr>
                     <td>/articles/{n}/issue</td>
@@ -303,9 +322,30 @@
                     <td>{n}: [0-9]+</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <td><a href="rest/articles/1/issue">/rest/articles/1/issue</a><br/>
-                        <a href="rest/articles/1/issue/articles">/rest/articles/1/issue/articles</a></td>
-                </tr>              
+                    <td><a data-rest-test href="rest/articles/1/issue">/rest/articles/1/issue</a><br/>
+                        <a data-rest-test href="rest/articles/1/issue/articles">/rest/articles/1/issue/articles</a></td>
+                </tr>  
+
+
+                <tr>
+                    <td >/auth/login</td>
+                    <td>POST</td>
+                    <td></td>
+                    <td>form-encoded username and password</td>
+                    <td></td>
+                    <td><span data-rest-test-url="rest/auth/login" data-rest-test-method="post" 
+                              data-rest-test-content-type="application/x-www-form-urlencoded" data-rest-test-payload="username=u&password=p">Check</span></td>
+
+                </tr>
+                <tr>
+                    <td >/auth/logout</td>
+                    <td>DELETE</td>
+                    <td></td>
+                    <td></td>
+                    <td>Bearer token</td>
+                    <td></td>
+                </tr>
+
             </tbody>
         </table>
 
@@ -316,7 +356,7 @@
              * corresponding AJAX call with the Authorization header.
              * 
              */
-            
+
             function sendLoginRequest(u, p) {
                 let xhr = new XMLHttpRequest();
                 xhr.open("POST", "rest/auth/login", false);
@@ -370,6 +410,58 @@
                 document.getElementById("token").value = token;
                 e.preventDefault();
             });
+
+
+            /////////////////
+
+            let tests_count = 0;
+            let tests_ok_count = 0;
+            let tl = document.querySelectorAll("[data-rest-test-url], [href][data-rest-test]");
+            for (let i = 0; i < tl.length; ++i) {
+                let element = tl.item(i);
+                let url = element.hasAttribute("href") ? element.getAttribute("href") : element.getAttribute("data-rest-test-url");
+                let method = element.hasAttribute("data-rest-test-method") ? element.getAttribute("data-rest-test-method") : "GET";
+                let payload = element.hasAttribute("data-rest-test-payload") ? element.getAttribute("data-rest-test-method") : null;
+                let payloadType = element.hasAttribute("data-rest-test-content-type") ? element.getAttribute("data-rest-test-content-type") : null;
+                let acceptType = element.hasAttribute("data-rest-test-accept") ? element.getAttribute("data-rest-test-accept") : null;
+                let responseText = element.hasAttribute("data-rest-test-response") ? element.getAttribute("data-rest-test-response") : null;
+                let responseStatus = element.hasAttribute("data-rest-test-status") ? element.getAttribute("data-rest-test-status") : 200;
+                let responseCallback = function (callResponse, callStatus) {
+                    element.classList.remove("rest-test-wait");
+                    if ((responseStatus === null || (callStatus == responseStatus))
+                            && (responseText === null || (callResponse === responseText))) {
+                        element.classList.add("rest-test-ok");
+                        tests_ok_count++;
+                    } else {
+                        element.classList.add("rest-test-error");
+                        element.setAttribute("data-test-out-response", callResponse);
+                        element.setAttribute("data-test-out-status", callStatus);
+                    }
+                };
+                console.log("checking rest endpoint: " + url);
+                element.classList.add("rest-test-wait");
+                tests_count++;
+                sendRestRequest(method, url, responseCallback, acceptType, payload, payloadType);
+            }
+
+            function sendRestRequest(method, url, callback, acceptType = null, payload = null, payloadType = null, token = null) {
+                let xhr = new XMLHttpRequest();
+                xhr.open(method, url, true);
+                if (token !== null)
+                    xhr.setRequestHeader("Authorization", "Bearer " + token);
+                if (payloadType !== null)
+                    xhr.setRequestHeader("Content-Type", payloadType);
+                if (acceptType !== null)
+                    xhr.setRequestHeader("Accept", acceptType);
+                xhr.send(payload);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        let response = xhr.responseText;
+                        let status = xhr.status;
+                        callback(response, status);
+                    }
+                };
+            }
 
         </script>
     </body>
