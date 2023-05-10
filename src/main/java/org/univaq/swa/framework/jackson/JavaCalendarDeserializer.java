@@ -1,4 +1,4 @@
-package org.univaq.swa.examples.jackson;
+package org.univaq.swa.framework.jackson;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;

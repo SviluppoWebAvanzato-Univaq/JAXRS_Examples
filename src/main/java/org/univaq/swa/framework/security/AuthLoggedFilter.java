@@ -1,4 +1,4 @@
-package org.univaq.swa.examples.security;
+package org.univaq.swa.framework.security;
 
 import jakarta.annotation.Priority;
 import jakarta.ws.rs.Priorities;
@@ -16,9 +16,9 @@ import java.security.Principal;
  * @author didattica
  */
 @Provider
-@AuthLevel1
+@Logged
 @Priority(Priorities.AUTHENTICATION)
-public class AuthLevel1Filter implements ContainerRequestFilter {
+public class AuthLoggedFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
@@ -38,13 +38,13 @@ public class AuthLevel1Filter implements ContainerRequestFilter {
         if (token != null && !token.isEmpty()) {
             try {
                 //validiamo il token
-                final String user = validateToken(token);
-                if (user != null) {
+                final String username = AuthHelpers.getInstance().validateToken(token);
+                if (username != null) {
                     //inseriamo nel contesto i risultati dell'autenticazione
                     //per farli usare dai nostri metodi restful
                     //iniettando @Context ContainerRequestContext
                     requestContext.setProperty("token", token);
-                    requestContext.setProperty("user", user);
+                    requestContext.setProperty("user", username);
                     //OPPURE
                     // https://dzone.com/articles/custom-security-context-injax-rs
                     //mettiamo i dati anche nel securitycontext standard di JAXRS...
@@ -56,7 +56,7 @@ public class AuthLevel1Filter implements ContainerRequestFilter {
                             return new Principal() {
                                 @Override
                                 public String getName() {
-                                    return user;
+                                    return username;
                                 }
                             };
                         }
@@ -88,10 +88,5 @@ public class AuthLevel1Filter implements ContainerRequestFilter {
         } else {
             requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
         }
-    }
-
-    private String validateToken(String token) {
-        //JWT                
-        return JWTHelpers.getInstance().validateToken(token);
     }
 }

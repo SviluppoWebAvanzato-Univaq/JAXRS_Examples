@@ -1,10 +1,9 @@
-package org.univaq.swa.examples.security;
+package org.univaq.swa.examples.exceptions;
 
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
-import org.univaq.swa.examples.exceptions.CustomException;
 
 
 /**

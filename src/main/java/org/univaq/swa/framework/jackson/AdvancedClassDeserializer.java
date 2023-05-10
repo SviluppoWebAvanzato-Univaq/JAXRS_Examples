@@ -1,4 +1,4 @@
-package org.univaq.swa.examples.jackson;
+package org.univaq.swa.framework.jackson;
 
 import java.io.IOException;
 

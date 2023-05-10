@@ -1,5 +1,5 @@
 
-package org.univaq.swa.examples.jackson;
+package org.univaq.swa.framework.jackson;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

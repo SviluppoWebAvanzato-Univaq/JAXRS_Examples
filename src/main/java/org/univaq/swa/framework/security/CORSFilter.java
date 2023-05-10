@@ -1,4 +1,4 @@
-package org.univaq.swa.examples.security;
+package org.univaq.swa.framework.security;
 
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;

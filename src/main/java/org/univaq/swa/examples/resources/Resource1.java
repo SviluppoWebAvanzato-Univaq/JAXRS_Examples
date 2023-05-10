@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.univaq.swa.examples.exceptions.RESTWebApplicationException;
-import org.univaq.swa.examples.security.AuthLevel1;
+import org.univaq.swa.framework.security.Logged;
 
 /**
  *
@@ -578,7 +578,7 @@ public class Resource1 {
     //<qualsiasi metodo> /rest/res1/secure
     @Path("secure")
     @GET
-    @AuthLevel1
+    @Logged
     public String get_secures_text() {
         return "secured text";
     }

@@ -1,4 +1,4 @@
-package org.univaq.swa.examples.security;
+package org.univaq.swa.framework.security;
 
 import jakarta.ws.rs.NameBinding;
 import java.lang.annotation.ElementType;
@@ -13,6 +13,6 @@ import java.lang.annotation.Target;
 @NameBinding
 @Retention(RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})
-public @interface AuthLevel1 {
+public @interface Logged {
 
 }

@@ -1,20 +1,20 @@
 package org.univaq.swa.examples.base;
 
-import org.univaq.swa.examples.security.CORSFilter;
-import org.univaq.swa.examples.security.AppExceptionMapper;
+import org.univaq.swa.framework.security.CORSFilter;
 import com.fasterxml.jackson.jakarta.rs.json.JacksonJsonProvider;
-import org.univaq.swa.examples.jackson.ObjectMapperContextResolver;
+import org.univaq.swa.framework.jackson.ObjectMapperContextResolver;
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import org.univaq.swa.examples.exceptions.AppExceptionMapper;
 import org.univaq.swa.examples.resources.journal.ArticlesRes;
 import org.univaq.swa.examples.resources.journal.IssuesRes;
 import org.univaq.swa.examples.resources.Resource1;
 import org.univaq.swa.examples.resources.Resource2;
-import org.univaq.swa.examples.security.AuthLevel1Filter;
-import org.univaq.swa.examples.security.AuthenticationRes;
+import org.univaq.swa.framework.security.AuthLoggedFilter;
+import org.univaq.swa.framework.security.AuthenticationRes;
 
 /**
  *
@@ -34,10 +34,10 @@ public class JAXRSApplication extends Application {
         //con l'annotazione Path) che vogliamo pubblicare
         c.add(Resource1.class);
         //notare come questo esempio presenti più risorse root
-        c.add(Resource2.class);
-        c.add(AuthenticationRes.class);
+        c.add(Resource2.class);        
         c.add(ArticlesRes.class);
         c.add(IssuesRes.class);
+        c.add(AuthenticationRes.class);
 
         //aggiungiamo il provider Jackson per poter
         //usare i suoi servizi di serializzazione e 
@@ -48,7 +48,7 @@ public class JAXRSApplication extends Application {
         c.add(ObjectMapperContextResolver.class);
 
         //esempio di autenticazione
-        c.add(AuthLevel1Filter.class);
+        c.add(AuthLoggedFilter.class);
 
         //aggiungiamo il filtro che gestisce gli header CORS
         c.add(CORSFilter.class);
