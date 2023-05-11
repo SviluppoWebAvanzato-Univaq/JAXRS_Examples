@@ -1,7 +1,7 @@
 # JAXRS_Examples_Maven
-> JAX-RS Examples
+> JAX-RS examples and basic usage
 
-
+This Java web application contains several examples that show the varius features of JAX-RS.
  
 ## Usage
 
