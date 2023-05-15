@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import org.univaq.swa.examples.exceptions.AppExceptionMapper;
+import org.univaq.swa.examples.exceptions.JacksonExceptionMapper;
 import org.univaq.swa.examples.resources.journal.ArticlesRes;
 import org.univaq.swa.examples.resources.journal.IssuesRes;
 import org.univaq.swa.examples.resources.Resource1;
@@ -53,9 +54,9 @@ public class JAXRSApplication extends Application {
         //aggiungiamo il filtro che gestisce gli header CORS
         c.add(CORSFilter.class);
 
-        //esempio di exception mapper, che mappa in Response eccezioni non 
-        //già derivanti da WebApplicationException
+        //esempi di exception mapper, che mappano in Response eccezioni non già derivanti da WebApplicationException
         c.add(AppExceptionMapper.class);
+        c.add(JacksonExceptionMapper.class);
 
         classes = Collections.unmodifiableSet(c);
     }
